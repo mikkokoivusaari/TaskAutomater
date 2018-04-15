@@ -8,22 +8,47 @@
 
 // Apply the java-library plugin to add support for Java Library
 apply plugin: 'java-library'
+apply plugin: 'war'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+   
 }
 
+repositories {
+    maven {
+        url  "https://dl.bintray.com/bmuschko/gradle-plugins" 
+    }
+}
+//apply plugin: 'com.bmuschko.tomcat'
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
 	compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.25.1'
+	compile 'com.bmuschko:gradle-tomcat-plugin:2.5'
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:23.0'
-
+	//classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    repositories {
+    mavenCentral()
+}
+/*
+dependencies {
+	
+    def tomcatVersion = '9.0.1'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",
+           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}*/
+/*
+tomcat {
+    httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
+    ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+}*/
 }
 
