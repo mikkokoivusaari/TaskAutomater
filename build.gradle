@@ -9,6 +9,7 @@
 // Apply the java-library plugin to add support for Java Library
 apply plugin: 'java-library'
 apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -34,9 +35,11 @@ dependencies {
 	//classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    project.webAppDirName = 'WebContent'
     repositories {
     mavenCentral()
 }
+
 /*
 dependencies {
 	
@@ -44,7 +47,8 @@ dependencies {
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
-}*/
+}
+*/
 /*
 tomcat {
     httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
