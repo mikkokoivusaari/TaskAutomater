@@ -43,7 +43,7 @@ public class Clients {
                 target.path("rest").path("hello").request().accept(MediaType.TEXT_XML).get(String.class);
         String htmlAnswer=
                 target.path("rest").path("hello").request().accept(MediaType.TEXT_HTML).get(String.class);
-
+        
         System.out.println(response);
         System.out.println(plainAnswer);
         System.out.println(xmlAnswer);
