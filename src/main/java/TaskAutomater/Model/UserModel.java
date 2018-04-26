@@ -4,6 +4,10 @@
 // 24 Apr 2018
 package TaskAutomater.Model;
 
+import java.time.ZonedDateTime;
+
+import org.bson.types.ObjectId;
+
 /**
  * @author mikko
  *
@@ -11,6 +15,9 @@ package TaskAutomater.Model;
 public class UserModel {
 	private String uname;
 	private String fname,lname;
+	private ZonedDateTime entryTime, lastUpdated;
+	private ObjectId id ; 
+	private Integer[] roles;
 	//TODO
 	//password hash and inserting
 	private String email;
@@ -61,6 +68,54 @@ public class UserModel {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	/**
+	 * @return the lastUpdated
+	 */
+	public ZonedDateTime getLastUpdated() {
+		return lastUpdated;
+	}
+	/**
+	 * @param lastUpdated the lastUpdated to set
+	 */
+	public void setLastUpdated(ZonedDateTime lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+	/**
+	 * @return the entryTime
+	 */
+	public ZonedDateTime getEntryTime() {
+		return entryTime;
+	}
+	/**
+	 * @param entryTime the entryTime to set
+	 */
+	public void setEntryTime(ZonedDateTime entryTime) {
+		this.entryTime = entryTime;
+	}
+	/**
+	 * @return the id
+	 */
+	public ObjectId getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+	/**
+	 * @return the roles
+	 */
+	public Integer[] getRoles() {
+		return roles;
+	}
+	/**
+	 * @param roles the roles to set
+	 */
+	public void setRoles(Integer[] roles) {
+		this.roles = roles;
 	}
 	
 	
