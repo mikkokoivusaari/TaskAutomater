@@ -49,18 +49,29 @@ public class UserConverter {
 		if (id !=null ) {
 			doc.append("_id", id);
 		}
-		doc.append("uname", user.getUname());
+		//doc.append("uname", user.getUname());
+		//adding data document to fill in the userdata
+		//Document data = new Document();
+		doc.append("Data", new BasicDBObject(
+				"uname", user.getUname())
+				.append("first", user.getFname())
+			.append("lastName", user.getLname())
+			.append("email", user.getEmail())
+			
+		);
+				
+		
 		Integer[] role = user.getRoles();
+		//helper document to complete json.
 		Document doc2 = new Document();
-		//Document Roles = RoleConverter.convertIntToBSON(role);
 		
-		
-				for (int i=0; i<role.length;i++) {
-					System.out.println(i);
+		//Looping through given roles and inserting them into doc2
+		for (int i=0; i<role.length;i++) {
+			//System.out.println(i);
 		    doc2.append("role" + i , role[i]);
 		
-		
 		}
+				//using 2 docs to complete the correct layout for roles
 				doc.append("Roles", new BasicDBObject(
 						"userRoles", "here")
 						
