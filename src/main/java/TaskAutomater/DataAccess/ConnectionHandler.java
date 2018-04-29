@@ -19,17 +19,17 @@ import com.mongodb.connection.*;
 import java.lang.String.*;
 public class ConnectionHandler {
 
-	private static Logger logger = LogManager.getLogger(ConnectionHandler.class.getName());
+//	private static Logger logger = LogManager.getLogger(ConnectionHandler.class.getName());
 	//private static MongoConnection instance = new MongoConnection();
 	
 	
-	private static MongoClient mongo = new MongoClient();
-	private MongoDatabase db = mongo.getDatabase("testing");
+	private static MongoClient mongo ;
+	private MongoDatabase db ;//= mongo.getDatabase("testing");
 	//private MongoConnection() {}
 	
 	public MongoClient getMongo() throws Exception{
 		if (mongo == null) {
-			logger.debug("Starting mongo");
+	//		logger.debug("Starting mongo");
 			MongoClientOptions.Builder options = MongoClientOptions.builder()
 					.connectionsPerHost(4)
 					.maxConnectionIdleTime((60*1_000))
@@ -38,15 +38,15 @@ public class ConnectionHandler {
 			//Change this part to read from config file. Preferably some sort of config validator + handler 
 			//with ability to change parts of it through client when you have correct permissions
 			MongoClientURI uri = new MongoClientURI("mongodb://192.168.1.8:27017", options); 
-			logger.info("connecting to @  ", uri.toString());
+	//		logger.info("connecting to @  ", uri.toString());
 			
 			try {
 				mongo = new MongoClient(uri);
 				mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
 			}catch (MongoException ex){
-				logger.error("Error occured while connecting to DB", ex);
+			//	logger.error("Error occured while connecting to DB", ex);
 			}catch (Exception ex) {
-				logger.error("Error when connection to DB", ex);
+			//	logger.error("Error when connection to DB", ex);
 			}
 			
 			//to be able to write
@@ -61,8 +61,8 @@ public class ConnectionHandler {
 				/*
 				 * Konffeista kannat jne.
 				 * */
-				String dbname = "Testing";
-				logger.debug("Starting datastore on % : ",dbname);
+				String dbname = "testing";
+			//	logger.debug("Starting datastore on % : ",dbname);
 				db= mongo.getDatabase(dbname);
 			}
 		return db;
@@ -72,7 +72,7 @@ public class ConnectionHandler {
 		getDataStore();
 	}
 	public void close() {
-		logger.debug("Closing connection");
+		//logger.debug("Closing connection");
 		if (mongo!=null) {
 			try {
 				mongo.close();
@@ -80,7 +80,7 @@ public class ConnectionHandler {
 				mongo = null;
 				db = null;
 			}catch (Exception e){
-				logger.error("error closing connection %", e);
+		//		logger.error("error closing connection %", e);
 			}
 		}
 	}

@@ -44,20 +44,28 @@ public class UserConverter {
 				
 				"DocumentType", "User")
 				.append("DateUpdated", now.toString())
-					.append("EntryTime", entry
+					.append("EntryTime", entry.toString()
 					);
 		if (id !=null ) {
 			doc.append("_id", id);
 		}
+		doc.append("uname", user.getUname());
 		Integer[] role = user.getRoles();
-		doc.append("Roles", new BasicDBObject(
-				"userRoles", "here"));
-				for (int i=0; i<user.getRoles().length;i++) {
-					
-		    doc.append("Roles.role", role[i]);
+		Document doc2 = new Document();
+		//Document Roles = RoleConverter.convertIntToBSON(role);
+		
+		
+				for (int i=0; i<role.length;i++) {
+					System.out.println(i);
+		    doc2.append("role" + i , role[i]);
 		
 		
 		}
+				doc.append("Roles", new BasicDBObject(
+						"userRoles", "here")
+						
+						).append("Roles", doc2);
+						
 		return doc;
 		
 	}
