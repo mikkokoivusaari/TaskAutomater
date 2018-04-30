@@ -59,7 +59,6 @@ public class UserConverter {
 			.append("email", user.getEmail())
 			
 		);
-				
 		
 		Integer[] role = user.getRoles();
 		//helper document to complete json.
