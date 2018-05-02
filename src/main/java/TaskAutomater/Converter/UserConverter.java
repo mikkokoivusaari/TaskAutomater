@@ -19,7 +19,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 public class UserConverter {
-
+	//TODO issue 27
 	//Convert User Object to mongo 
 	public static Document toUserModel(UserModel user) {
 		ZonedDateTime entry;
@@ -81,8 +81,16 @@ public class UserConverter {
 	}
 	
 	//convert mongo User object to User in this application
-	public static UserModel toUserModel() {
+	public static UserModel toUserModel(Document doc) {
 		UserModel user = new UserModel();	
+		user.setUname(doc.get("uname").toString());
+
+		user.setFname(doc.get("first").toString());
+
+		user.setLname(doc.get("lastName").toString());
+		user.setEmail(doc.get("email").toString());
+		//TODO iterate roles from doc to int[]
+		user.setId(doc.getObjectId("_id")); //cant be null since object is coming from mongo
 		return user;
 	}
 }
