@@ -21,7 +21,7 @@ public class UserModel {
 	//TODO
 	//password hash and inserting
 	private String email;
-	//TODO should we use username as id. Since it must be unique anyway
+	//TODO should we use username as id. Since it must be unique anyway?
 	/**
 	 * @return the uname
 	 */

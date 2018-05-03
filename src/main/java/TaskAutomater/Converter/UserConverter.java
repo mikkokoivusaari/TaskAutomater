@@ -77,7 +77,7 @@ public class UserConverter {
 						
 		return doc;
 		
-	}
+	} 
 	
 	//convert mongo User object to User in this application
 	public static UserModel toUserModel(Document doc) {
