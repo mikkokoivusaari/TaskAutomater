@@ -19,7 +19,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 public class UserConverter {
-	//TODO issue 27
 	//Convert User Object to mongo 
 	public static Document toUserModel(UserModel user) {
 		ZonedDateTime entry;
@@ -53,10 +52,10 @@ public class UserConverter {
 		//adding data document to fill in the userdata
 		//Document data = new Document();
 		doc.append("Data", new BasicDBObject(
-				"uname", user.getUname())
-				.append("first", user.getFname())
-			.append("lastName", user.getLname())
-			.append("email", user.getEmail())
+				"UName", user.getUname())
+				.append("First", user.getFname())
+			.append("LastName", user.getLname())
+			.append("Email", user.getEmail())
 			
 		);
 		
@@ -67,12 +66,12 @@ public class UserConverter {
 		//Looping through given roles and inserting them into doc2
 		for (int i=0; i<role.length;i++) {
 			//System.out.println(i);
-		    doc2.append("role" + i , role[i]);
+		    doc2.append("Role" + i , role[i]);
 		
 		}
 				//using 2 docs to complete the correct layout for roles
 				doc.append("Roles", new BasicDBObject(
-						"userRoles", "here")
+						"UserRoles", "here")
 						
 						).append("Roles", doc2);
 						
@@ -83,14 +82,17 @@ public class UserConverter {
 	//convert mongo User object to User in this application
 	public static UserModel toUserModel(Document doc) {
 		UserModel user = new UserModel();	
-		user.setUname(doc.get("uname").toString());
+		user.setUname(doc.get("UName").toString());
 
-		user.setFname(doc.get("first").toString());
+		user.setFname(doc.get("First").toString());
 
-		user.setLname(doc.get("lastName").toString());
-		user.setEmail(doc.get("email").toString());
+		user.setLname(doc.get("LastName").toString());
+		user.setEmail(doc.get("Email").toString());
 		//TODO iterate roles from doc to int[]
 		user.setId(doc.getObjectId("_id")); //cant be null since object is coming from mongo
+		//Converting entrytime to variable we can use.
+		ZonedDateTime entry = (ZonedDateTime) doc.get("EntryTime");
+		user.setEntryTime(entry);
 		return user;
 	}
 }

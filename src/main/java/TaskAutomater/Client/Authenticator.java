@@ -10,5 +10,6 @@ package TaskAutomater.Client;
  */
 public class Authenticator {
 	//TODO hashing and verifying
+	
 }
 
