@@ -48,6 +48,7 @@ public class ServiceMainTest {
 			collection.insertOne( person);
 			
 			Assert.assertNotNull(database);
+			mongo.close();
 	}
 		@Test
 		public void testInsert() {
@@ -63,7 +64,7 @@ public class ServiceMainTest {
                                                  .append("EntryTime", now.toString()  ));
                    
 			collection.insertOne( person);
-
+			mongo.close();
 			
 		}
 	
