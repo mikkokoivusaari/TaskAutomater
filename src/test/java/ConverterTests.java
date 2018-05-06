@@ -1,5 +1,8 @@
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.junit.After;
@@ -11,6 +14,7 @@ import org.junit.Test;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBAddress;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -59,17 +63,33 @@ public class ConverterTests {
 		//close db connections
 		conn.close();
 	}
-
+/*
 	@Test
 	public void test() {
 		fail("Not yet implemented");
-	}
+	}*/
 	//Testing conversion to user from mongo data.
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testConversionToUserFromMongo() {
 		//UserConverter use = new UserConverter();
+		UserModel p = new UserModel();
+		MongoClient client = conn.getInstance();
+		MongoDatabase db = client.getDatabase("testing");
+		MongoCollection<Document> collection = db.getCollection("Users");
+
+		Document query = new Document("UName", "matti.testi");
+		FindIterable<Document> docs =  collection.find();
+		// FindIterable<Document> cursor = collection.find(query);
+		 for (Document doc: docs) {
+			System.out.println(doc);
+			 p = UserConverter.toUserModel(doc);
+		 }
+		String name = p.getUname();
+		String odotettu = "matti.testi";
+		assertEquals("Nimet ei oo samat", odotettu, name);
 		
-	}
+		}
 	//Testing conversion to mongo from user data.
 	@Test
 	public void testConversionToMongoFromUser() {

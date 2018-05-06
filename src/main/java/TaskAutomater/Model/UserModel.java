@@ -4,7 +4,9 @@
 // 24 Apr 2018
 package TaskAutomater.Model;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 import org.bson.types.ObjectId;
 
@@ -15,9 +17,24 @@ import org.bson.types.ObjectId;
 public class UserModel {
 	private String uname;
 	private String fname,lname;
-	private ZonedDateTime entryTime, lastUpdated;
+	Date entryTime;
+	private ZonedDateTime lastUpdated;
 	private ObjectId id ; 
 	private Integer[] roles;
+
+	String zoneID ;
+	/**
+	 * @return the zoneID
+	 */
+	public String getZoneID() {
+		return zoneID;
+	}
+	/**
+	 * @param zoneID the zoneID to set
+	 */
+	public void setZoneID(String zoneID) {
+		this.zoneID = zoneID;
+	}
 	//TODO
 	//password hash and inserting
 	private String email;
@@ -85,14 +102,14 @@ public class UserModel {
 	/**
 	 * @return the entryTime
 	 */
-	public ZonedDateTime getEntryTime() {
+	public Date getEntryTime() {
 		return entryTime;
 	}
 	/**
-	 * @param entryTime the entryTime to set
+	 * @param date the entryTime to set
 	 */
-	public void setEntryTime(ZonedDateTime entryTime) {
-		this.entryTime = entryTime;
+	public void setEntryTime(Date date) {
+		this.entryTime = date;
 	}
 	/**
 	 * @return the id
