@@ -25,7 +25,7 @@ import TaskAutomater.DataAccess.ConnectionHandler;
 import TaskAutomater.Model.UserModel;
 
 /**
- * 
+ * Most of these tests involve mongo db so if we want to test locally without database you have to rewrite these
  */
 // 26 Apr 2018
 public class ConverterTests {
@@ -116,23 +116,62 @@ public class ConverterTests {
 		FindIterable<Document> result  ;
 		result =  collection.find(query);
 		System.out.println();
+		//TODO add asserts to this 
 	}
 	@Test
 	public void testModifyingExistingUser() {
 		//Test is complete when dateupdated is greater than datecreated and some info has been changed
+		
+	}
+	
+	@Test
+	public void findSpecificUser() {
+	//First add some user that can be singled out. And verify that we've found the user on the search criteria
+		UserConverter use = new UserConverter();
+		UserModel user = new UserModel();
+		user.setUname("esa.etsi");
+		user.setEmail("testiEmai@mail.com");
+		user.setFname("esa");
+		user.setLname("etsi");
+		Integer[] i ={ 1,2};
+		user.setRoles(i);
+		//send this user to converter
+		Document doc =  use.toUserModel(user);
+		MongoClient client = conn.getInstance();
+		MongoDatabase db = client.getDatabase("testing");
+	
+		MongoCollection<Document> collection  =  db.getCollection("Users");
+		collection.insertOne(doc);
+		
+		Document query = new Document("Data.UName", "esa.etsi");
+				
+		//DBObject data = this.col.findOne(query);
+		//return PersonConverter.toPerson(data);
+		FindIterable<Document> result  ;
+		result =  collection.find(query);
+		System.out.println("TÄMÄ TESTI" +result);
+		UserModel user2 = new UserModel();
+		for (Document res : result) {
+			user2 =  use.toUserModel(res);
+		}
+		
+		
+		String odotettu = "esa.etsi";
+		assertEquals("Odotettu nimi", odotettu, user2.getUname());
+		
 	}
 	@Test
 	public void removeExistingUser() {
 		//Test is completed when specific user is removed
 	}
 	@Test
-	public void findSpecificUser() {
-	//First add some user that can be singled out. And verify that we've found the user on the search criteria
-	}
-	@Test
 	public void findAllUsers() {
 	//First get count of user documets and then do something add them to user array or something
 	}
-
+	@Test
+	public void getAllUserNames() {
+		//create functionality to prevent users from having identical usernames this can be achieved by fetching all 
+		//and checking the given input againts existing users
+	}
 }
 
