@@ -22,7 +22,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 public class UserConverter {
-	
+	//TODO clear code and make it more readable
 	//Convert User Object to mongo 
 	public static Document toUserModel(UserModel user) {
 		Date entry = new Date();
@@ -54,7 +54,7 @@ public class UserConverter {
 		Document doc = new Document(
 				
 				"DocumentType", "User")
-				.append("DateUpdated", dat)
+				.append("DateUpdated", dat.getTime())
 					.append("EntryTime", dat
 					
 					);//.append("ZoneID", zoned.toString());
@@ -105,7 +105,6 @@ public class UserConverter {
 
 		user.setLname(data.get("LastName").toString());
 		user.setEmail(data.get("Email").toString());
-		//TODO iterate roles from doc to int[]
 		user.setId(doc.getObjectId("_id")); //cant be null since object is coming from mongo
 		//Converting entrytime to variable we can use.
 		Document roles = (Document) doc.get("Roles");
@@ -121,6 +120,7 @@ public class UserConverter {
 		//TODO add ability to fetch zoneID from document else use default
 		//Instant instant = date.toInstant();
 		//ZonedDateTime entry = instant.atZone(zoneID);
+		//Maybe add timezone to dates or add info about users timezone
 		//ZonedDateTime entry = (ZonedDateTime) doc.get("EntryTime");
 		user.setEntryTime(date);
 		return user;

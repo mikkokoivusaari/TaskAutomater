@@ -117,6 +117,22 @@ public class ConverterTests {
 		result =  collection.find(query);
 		System.out.println();
 	}
+	@Test
+	public void testModifyingExistingUser() {
+		//Test is complete when dateupdated is greater than datecreated and some info has been changed
+	}
+	@Test
+	public void removeExistingUser() {
+		//Test is completed when specific user is removed
+	}
+	@Test
+	public void findSpecificUser() {
+	//First add some user that can be singled out. And verify that we've found the user on the search criteria
+	}
+	@Test
+	public void findAllUsers() {
+	//First get count of user documets and then do something add them to user array or something
+	}
 
 }
 
