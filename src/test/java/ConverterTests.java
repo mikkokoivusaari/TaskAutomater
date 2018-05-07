@@ -20,6 +20,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import TaskAutomater.Converter.RandomGenerator;
 import TaskAutomater.Converter.UserConverter;
 import TaskAutomater.DataAccess.ConnectionHandler;
 import TaskAutomater.Model.UserModel;
@@ -78,12 +79,13 @@ public class ConverterTests {
 		MongoDatabase db = client.getDatabase("testing");
 		MongoCollection<Document> collection = db.getCollection("Users");
 
-		Document query = new Document("UName", "matti.testi");
-		FindIterable<Document> docs =  collection.find();
+		Document query = new Document("Data.UName", "matti.testi");
+		FindIterable<Document> docs =  collection.find(query);
 		// FindIterable<Document> cursor = collection.find(query);
 		 for (Document doc: docs) {
 			System.out.println(doc);
 			 p = UserConverter.toUserModel(doc);
+				if (p.getUname()=="matti.testi") { break;}
 		 }
 		String name = p.getUname();
 		String odotettu = "matti.testi";
@@ -95,7 +97,10 @@ public class ConverterTests {
 	public void testConversionToMongoFromUser() {
 		UserConverter use = new UserConverter();
 		UserModel user = new UserModel();
-		user.setUname("matti.testi");
+		//TODO start generating usernames since we're using indexes on user 
+		RandomGenerator rn = new RandomGenerator();
+		String u = rn.randomIdentifier();
+		user.setUname(u);
 		user.setEmail("testiEmai@mail.com");
 		user.setFname("matti");
 		user.setLname("testi");
@@ -129,7 +134,10 @@ public class ConverterTests {
 	//First add some user that can be singled out. And verify that we've found the user on the search criteria
 		UserConverter use = new UserConverter();
 		UserModel user = new UserModel();
-		user.setUname("esa.etsi");
+		//TODO start generating usernames like 5+5 characters or some preconfigured list
+		RandomGenerator rn = new RandomGenerator();
+		String u = rn.randomIdentifier();
+		user.setUname(u);
 		user.setEmail("testiEmai@mail.com");
 		user.setFname("esa");
 		user.setLname("etsi");
@@ -163,7 +171,14 @@ public class ConverterTests {
 	@Test
 	public void removeExistingUser() {
 		//Test is completed when specific user is removed
+		//figure out if we want to delete or just set status as inactive and preven login etc. Stop that users timed jobs
 	}
+	@Test
+	public void tryRemovingAdmin() {
+		//Test is completed when specific user is removed
+		//figure out if we want to delete or just set status as inactive and preven login etc. Stop that users timed jobs
+	}
+	
 	@Test
 	public void findAllUsers() {
 	//First get count of user documets and then do something add them to user array or something
