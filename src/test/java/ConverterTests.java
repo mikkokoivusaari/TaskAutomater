@@ -101,6 +101,8 @@ public class ConverterTests {
 		RandomGenerator rn = new RandomGenerator();
 		String u = rn.randomIdentifier();
 		user.setUname(u);
+		//if you accidentally delete the wrong mongo entries uncomment the following line and run tests once and recomment it
+		//user.setName("matti.testi")
 		user.setEmail("testiEmai@mail.com");
 		user.setFname("matti");
 		user.setLname("testi");
@@ -138,6 +140,8 @@ public class ConverterTests {
 		RandomGenerator rn = new RandomGenerator();
 		String u = rn.randomIdentifier();
 		user.setUname(u);
+		//if you accidentally delete the user from mongo uncomment the following line and run once then re-comment
+		//user.setUname("esa.etsi");
 		user.setEmail("testiEmai@mail.com");
 		user.setFname("esa");
 		user.setLname("etsi");
