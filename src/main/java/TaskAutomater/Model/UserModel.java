@@ -7,6 +7,7 @@ package TaskAutomater.Model;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 import org.bson.types.ObjectId;
 
@@ -20,7 +21,20 @@ public class UserModel {
 	Date entryTime;
 	private ZonedDateTime lastUpdated;
 	private ObjectId id ; 
+	/**
+	 * @return the guid
+	 */
+	public UUID getGuid() {
+		return guid;
+	}
+	/**
+	 * @param guid the guid to set
+	 */
+	public void setGuid(UUID guid) {
+		this.guid = guid;
+	}
 	private Integer[] roles;
+	private UUID guid;
 
 	String zoneID ;
 	/**

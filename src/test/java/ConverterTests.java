@@ -161,7 +161,7 @@ public class ConverterTests {
 		//return PersonConverter.toPerson(data);
 		FindIterable<Document> result  ;
 		result =  collection.find(query);
-		System.out.println("TÄMÄ TESTI" +result);
+		//System.out.println("TÄMÄ TESTI" +result);
 		UserModel user2 = new UserModel();
 		for (Document res : result) {
 			user2 =  use.toUserModel(res);
