@@ -12,23 +12,32 @@ package TaskAutomater.DataAccess;
 import org.apache.logging.log4j.*;
 //import org.apache.logging.log4j.mongodb3.MongoDbConnection;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.*;
+//import com.mongodb.client.MongoCollection;
+//import com.mongodb.client.MongoDatabase;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClient.*;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+import com.mongodb.DB;
+import com.mongodb.Mongo;
+//import com.mongodb.MongoException;
+//import com.mongodb.WriteConcern;
 import com.mongodb.connection.*;
 import java.lang.String.*;
 public class ConnectionHandler {
-
+	
 //	private static Logger logger = LogManager.getLogger(ConnectionHandler.class.getName());
 	//private static MongoConnection instance = new MongoConnection();
 	
 	
-	private static MongoClient mongo ;
-	private MongoDatabase db ;//= mongo.getDatabase("testing");
+	public static MongoClient mongo = null;
+	public DB db = null;//= mongo.getDatabase("testing");
 	//private MongoConnection() {}
 	
 	public MongoClient getMongo() throws Exception{
-		if (mongo == null) {
+		if (ConnectionHandler.mongo == null) {
 	//		logger.debug("Starting mongo");
 			MongoClientOptions.Builder options = MongoClientOptions.builder()
 					.connectionsPerHost(4)
@@ -55,7 +64,7 @@ public class ConnectionHandler {
 		
 		return mongo;
 	}
-	public MongoDatabase getDataStore() {
+	public DB getDataStore() {
 			if (db == null) {
 				//TODO 
 				/*
@@ -63,7 +72,7 @@ public class ConnectionHandler {
 				 * */
 				String dbname = "testing";
 			//	logger.debug("Starting datastore on % : ",dbname);
-				db= mongo.getDatabase(dbname);
+				db= (DB) mongo.getDatabase(dbname);
 			}
 		return db;
 	}
@@ -84,8 +93,8 @@ public class ConnectionHandler {
 			}
 		}
 	}
-	public static MongoClient getInstance() {
-		return mongo;
+	public MongoClient getInstance() {
+		return  mongo;
 	}
 }
 

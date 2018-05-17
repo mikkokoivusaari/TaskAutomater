@@ -12,9 +12,20 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>addUser</display-name>
+ 	<servlet-name>addUser</servlet-name>
+ 	<servlet-class>TaskAutomater.Client.Servlets.addUser</servlet-class>
+ </servlet>
   <servlet-mapping>
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>addUser</servlet-name>
+  	<url-pattern>/addUser</url-pattern>
   </servlet-mapping>
   
 </web-app> 

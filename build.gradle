@@ -23,6 +23,9 @@ repositories {
     maven {
         url  "https://dl.bintray.com/bmuschko/gradle-plugins" 
          url "https://oss.sonatype.org/content/repositories/snapshots/"
+         
+	 url "https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api"
+	 url "https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver"
     }
 }
 
@@ -42,6 +45,11 @@ dependencies {
 	//classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
 	 compile 'org.mongodb:mongodb-driver-sync:3.7.0-rc0'
 	 //compile 'org.mongodb:mongo-java-driver:3.1.0-SNAPSHOT'
+	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+	 providedCompile 'org.apache.tomcat:tomcat-catalina:8.5.16'
+	 
+	compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.7.0'
+	 
     testImplementation 'junit:junit:4.12'
     project.webAppDirName = 'WebContent'
     repositories {
