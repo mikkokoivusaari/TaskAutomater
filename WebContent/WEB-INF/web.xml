@@ -19,6 +19,13 @@
  	<servlet-name>addUser</servlet-name>
  	<servlet-class>TaskAutomater.Client.Servlets.addUser</servlet-class>
  </servlet>
+ <servlet>
+ 	<description>
+ 	</description>
+ 	<display-name>getAllUsers</display-name>
+ 	<servlet-name>getAllUsers</servlet-name>
+ 	<servlet-class>TaskAutomater.Client.Servlets.getAllUsers</servlet-class>
+ </servlet>
   <servlet-mapping>
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
@@ -26,6 +33,10 @@
   <servlet-mapping>
   	<servlet-name>addUser</servlet-name>
   	<url-pattern>/addUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>getAllUsers</servlet-name>
+  	<url-pattern>/getAllUsers</url-pattern>
   </servlet-mapping>
   
 </web-app> 
