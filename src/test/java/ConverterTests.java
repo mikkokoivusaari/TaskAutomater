@@ -186,6 +186,21 @@ public class ConverterTests {
 	@Test
 	public void findAllUsers() {
 	//First get count of user documets and then do something add them to user array or something
+		UserConverter use = new UserConverter();
+		MongoClient client = conn.getInstance();
+		MongoDatabase db = client.getDatabase("testing");
+	
+		MongoCollection<Document> collection  =  db.getCollection("Users");
+		FindIterable<Document> result  ;
+		result =  collection.find();
+		//System.out.println("TÄMÄ TESTI" +result);
+		UserModel user2 = new UserModel();
+		for (Document res : result) {
+			user2 =  use.toUserModel(res);
+			System.out.println("Find all users test" + user2.getUname());
+		}
+		
+		
 	}
 	@Test
 	public void getAllUserNames() {
