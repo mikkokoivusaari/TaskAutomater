@@ -54,8 +54,9 @@ public class getAllUsers extends HttpServlet {
 		}*/
 		UserManagement um = new UserManagement();
 		List<UserModel> list= um.getAllUsers();
-		response.getWriter().append(list).append(request.getContextPath());
+		//response.getWriter().append(list).append(request.getContextPath());
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		getServletContext().setAttribute("user", list);
 	}	
 
 	/**
@@ -80,6 +81,7 @@ public class getAllUsers extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	
 	}
 
 }
