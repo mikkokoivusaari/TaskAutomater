@@ -47,7 +47,7 @@ public class UserManagement extends ConnectionHandler {
 	public MongoClient setup() throws Exception {
 		ConnectionHandler conn = new ConnectionHandler();
 		
-		MongoClient client = (MongoClient) conn.getMongo();
+		MongoClient client =  conn.getMongo();
 		return client;
 	}
 	//adduser 

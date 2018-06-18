@@ -14,18 +14,22 @@ import org.apache.logging.log4j.*;
 
 //import com.mongodb.client.MongoCollection;
 //import com.mongodb.client.MongoDatabase;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClient.*;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoClientURI;
-import com.mongodb.MongoException;
+
+import com.mongodb.client.*;
+//import com.mongodb.client.MongoClientOptions;
+//import com.mongodb.MongoClientURI;
+//import com.mongodb.client.MongoException;
 import com.mongodb.WriteConcern;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerAddress;
+//import com.mongodb.MongoURI;
 //import com.mongodb.MongoException;
 //import com.mongodb.WriteConcern;
 import com.mongodb.connection.*;
 import java.lang.String.*;
+import java.util.Arrays;
 public class ConnectionHandler {
 	
 //	private static Logger logger = LogManager.getLogger(ConnectionHandler.class.getName());
@@ -39,18 +43,33 @@ public class ConnectionHandler {
 	public MongoClient getMongo() throws Exception{
 		if (ConnectionHandler.mongo == null) {
 	//		logger.debug("Starting mongo");
-			MongoClientOptions.Builder options = MongoClientOptions.builder()
+			//TODO check if there is alternative
+		/*	MongoClientOptions.Builder options = MongoClientOptions.builder()
 					.connectionsPerHost(4)
 					.maxConnectionIdleTime((60*1_000))
-					.maxConnectionLifeTime((60*1_000));;
+					.maxConnectionLifeTime((60*1_000));;*/
 			//TODO 
 			//Change this part to read from config file. Preferably some sort of config validator + handler 
 			//with ability to change parts of it through client when you have correct permissions
-			MongoClientURI uri = new MongoClientURI("mongodb://192.168.1.8:27017", options); 
-	//		logger.info("connecting to @  ", uri.toString());
-			
+			Mongo db  ;
+			//MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
+			//mongo  = MongoClients.create("mongodb://192.168.1.8",27017); 
+		/*	 mongo = MongoClients.create(
+			        MongoClientSettings.builder()
+			                .applyToClusterSettings(builder ->
+			                        builder.hosts(Arrays.asList(new ServerAddress("192.168.1.8", 27017))))
+			                .build());
+			 */
 			try {
-				mongo = new MongoClient(uri);
+			  ConnectionHandler.mongo = MongoClients.create("mongodb://192.168.1.8:27017");
+			} catch (Exception e){
+				System.out.println(e);
+			}
+			 //MongoClient client = new MongoClient("192.168.1.8", 27017);
+	//		logger.info("connecting to @  ", uri.toString());
+		/*	
+			try {
+				mongo = new MongoClient(connectionString);
 				mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
 			}catch (MongoException ex){
 			//	logger.error("Error occured while connecting to DB", ex);
@@ -61,7 +80,9 @@ public class ConnectionHandler {
 			//to be able to write
 			mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
 		}
+		*/
 		
+		}
 		return mongo;
 	}
 	public DB getDataStore() {
